@@ -13,6 +13,7 @@ coroutines = "1.10.2"
 datetime = "0.7.1"
 cache4k = "0.14.0"
 ktor = "3.2.3"
+navigation = "2.9.3"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -40,6 +41,7 @@ coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" 
 
 # Jb
 kotlin-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
+navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation" }
 kotlin-jsonx = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "jsonx" }
 kotlin-date = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "datetime" }
 
