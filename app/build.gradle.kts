@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.serialx)
 }
 
 android {
@@ -65,4 +66,11 @@ dependencies {
     implementation(libs.kotlin.coroutines)
     implementation(libs.kotlin.jsonx)
     implementation(libs.kotlin.date)
+
+    implementation(libs.cache4k)
+    implementation(libs.ktor.core)
+    implementation(libs.ktor.cio)
+    implementation(libs.ktor.json)
+    implementation(libs.ktor.logging)
+    implementation(libs.ktor.negotiation)
 }
