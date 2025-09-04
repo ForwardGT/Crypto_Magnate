@@ -1,10 +1,7 @@
 package com.blockchainlab.cryptomagnate.core.ui.animations
 
-import android.R.attr.x
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -70,13 +67,10 @@ fun BaseSpriteAnimation(
         }
     }
 
-    Column(
-        Modifier.fillMaxWidth()
-    ) {
+    Column(modifier = modifier) {
         Box(
-            modifier = modifier
+            modifier = Modifier
                 .size(sizeImage)
-                .offset(x = x.dp)
                 .drawWithCache {
                     val cachedFrames = frames
                     onDrawWithContent {
