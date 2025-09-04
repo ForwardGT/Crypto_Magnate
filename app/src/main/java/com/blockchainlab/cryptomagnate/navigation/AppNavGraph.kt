@@ -1,15 +1,11 @@
 package com.blockchainlab.cryptomagnate.navigation
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import kotlinx.serialization.Serializable
+import com.blockchainlab.cryptomagnate.features.profile.api.navigation.NavigationProfile
+import com.blockchainlab.cryptomagnate.features.profile.impl.navigation.addProfile
 
 @Composable
 fun AppNavGraph(
@@ -19,21 +15,8 @@ fun AppNavGraph(
     NavHost(
         modifier = modifier,
         navController = navController,
-        startDestination = TestScreen,
+        startDestination = NavigationProfile.Profile,
     ) {
-        composable<TestScreen> {
-            TestScreen()
-        }
-    }
-}
-
-@Serializable
-data object TestScreen
-
-@Composable
-fun TestScreen() {
-    Box(modifier = Modifier
-        .fillMaxSize()
-        .background(Color.DarkGray)) {
+        addProfile(navController)
     }
 }
