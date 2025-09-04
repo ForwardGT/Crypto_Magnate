@@ -1,8 +1,7 @@
-package com.blockchainlab.cryptomagnate.core.ui.theme
+package com.blockchainlab.cryptomagnate.core.ui.resources
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
 
 @Composable
 fun CryptoMagnateTheme(
@@ -10,9 +9,9 @@ fun CryptoMagnateTheme(
 ) {
     MaterialTheme(
         colorScheme = MaterialTheme.colorScheme.copy(
-            background = Color(0xff353434),
+            background = BaseColors.mainBackgroundColor,
         ),
-        shapes = MaterialTheme.shapes.copy(CmShapes.CmShape12),
+        shapes = MaterialTheme.shapes.copy(BaseShapes.CmShape12),
         typography = MaterialTheme.typography,
         content = content
     )

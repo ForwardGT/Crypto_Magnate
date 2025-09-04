@@ -1,4 +1,4 @@
-package com.blockchainlab.cryptomagnate.core.ui.theme
+package com.blockchainlab.cryptomagnate.core.ui.resources
 
 import androidx.compose.runtime.Stable
 import androidx.compose.ui.text.font.Font
@@ -8,7 +8,7 @@ import androidx.compose.ui.text.font.FontWeight
 import com.blockchainlab.cryptomagnate.R
 
 @Stable
-object CmFonts {
+object BaseFonts {
     val PlaypenSansFont = FontFamily(
         Font(
             resId = R.font.playpen_sans_text_regular,
