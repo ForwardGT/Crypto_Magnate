@@ -14,7 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.blockchainlab.cryptomagnate.core.ui.resources.BaseDrawable
 import com.blockchainlab.cryptomagnate.core.ui.resources.BaseIcons
-import com.blockchainlab.cryptomagnate.core.ui.resources.painter
+import com.blockchainlab.cryptomagnate.core.ui.resources.toPaint
 
 @Composable
 fun BaseIcon(
@@ -38,7 +38,7 @@ fun BaseIcon(
 ) {
     Icon(
         modifier = modifier,
-        painter = icon.painter(),
+        painter = icon.toPaint(),
         tint = tint,
         contentDescription = null,
     )

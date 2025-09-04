@@ -12,7 +12,7 @@ import com.blockchainlab.cryptomagnate.core.ui.preview.BasePreview
 import com.blockchainlab.cryptomagnate.core.ui.preview.LocalPreviewImage
 import com.blockchainlab.cryptomagnate.core.ui.resources.BaseDrawable
 import com.blockchainlab.cryptomagnate.core.ui.resources.BaseIcons
-import com.blockchainlab.cryptomagnate.core.ui.resources.painter
+import com.blockchainlab.cryptomagnate.core.ui.resources.toPaint
 
 @Composable
 fun BaseImage(
@@ -22,7 +22,7 @@ fun BaseImage(
 ) {
     Image(
         modifier = modifier,
-        painter = image.painter(),
+        painter = image.toPaint(),
         contentScale = contentScale,
         contentDescription = null,
     )
