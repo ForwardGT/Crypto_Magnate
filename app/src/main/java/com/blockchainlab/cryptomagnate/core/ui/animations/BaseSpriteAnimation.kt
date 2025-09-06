@@ -1,11 +1,10 @@
 package com.blockchainlab.cryptomagnate.core.ui.animations
 
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
@@ -30,31 +29,33 @@ import kotlinx.coroutines.delay
 fun BaseSpriteAnimation(
     modifier: Modifier = Modifier,
     imageBitmap: ImageBitmap,
-    sizeImage: Dp,
-    frameCount: Int,
-    frameDurationMs: Long = 90,
+    frameSize: Dp,
+    columns: Int,
+    rows: Int,
+    frameCount: Int = columns * rows,
+    frameDurationMs: Long = 150,
 ) {
-    // нарезаем кадры один раз
-    // Попробовать без derivedStateOf если при реактивной замене картинки не изменится ничего
-    val frames by remember(frameCount, frameDurationMs, sizeImage, imageBitmap) {
-        derivedStateOf {
-            List(frameCount) { index ->
-                val frameWidth = imageBitmap.width / frameCount
-                val frameHeight = imageBitmap.height
-                val bitmap = ImageBitmap(frameWidth, frameHeight)
-                val canvas = Canvas(bitmap)
-                val paint = Paint()
+    val frameWidthPx = imageBitmap.width / columns
+    val frameHeightPx = imageBitmap.height / rows
 
-                canvas.drawImageRect(
-                    image = imageBitmap,
-                    srcOffset = IntOffset(index * frameWidth, 0),
-                    srcSize = IntSize(frameWidth, frameHeight),
-                    dstOffset = IntOffset(0, 0),
-                    dstSize = IntSize(frameWidth, frameHeight),
-                    paint = paint
-                )
-                bitmap
-            }
+    val frames = remember(imageBitmap, columns, rows, frameCount) {
+        List(frameCount.coerceAtMost(columns * rows)) { index ->
+            val col = index % columns
+            val row = index / columns
+
+            val bitmap = ImageBitmap(frameWidthPx, frameHeightPx)
+            val canvas = Canvas(bitmap)
+            val paint = Paint()
+
+            canvas.drawImageRect(
+                image = imageBitmap,
+                srcOffset = IntOffset(col * frameWidthPx, row * frameHeightPx),
+                srcSize = IntSize(frameWidthPx, frameHeightPx),
+                dstOffset = IntOffset(0, 0),
+                dstSize = IntSize(frameWidthPx, frameHeightPx),
+                paint = paint
+            )
+            bitmap
         }
     }
 
@@ -67,21 +68,33 @@ fun BaseSpriteAnimation(
         }
     }
 
-    Column(modifier = modifier) {
-        Box(
-            modifier = Modifier
-                .size(sizeImage)
-                .drawWithCache {
-                    val cachedFrames = frames
-                    onDrawWithContent {
-                        drawContent()
-                        drawImage(
-                            cachedFrames[currentFrame],
-                            dstSize = IntSize(size.width.toInt(), size.height.toInt())
-                        )
-                    }
+//    //Todo Такой метод тож норм но currentFrame приходится убирать в кеш канваса.
+//    val infiniteTransition = rememberInfiniteTransition(label = "sprite")
+//    val progress by infiniteTransition.animateFloat(
+//        initialValue = 0f,
+//        targetValue = 1f,
+//        animationSpec = infiniteRepeatable(
+//            animation = tween((frameCount * frameDurationMs).toInt(), easing = LinearEasing),
+//            repeatMode = RepeatMode.Restart
+//        ), label = "spriteProgress"
+//    )
+//    val currentFrame = (progress * frameCount).toInt().coerceIn(0, frameCount - 1)
+
+    Box(
+        modifier = modifier
+            .size(frameSize)
+            .drawWithCache {
+                onDrawWithContent {
+                    drawContent()
+                    // Масштабируем кадр до нужного размера
+                    drawImage(
+                        image = frames[currentFrame],
+                        dstSize = IntSize(size.width.toInt(), size.height.toInt())
+                    )
                 }
-        )
+            }
+    ) {
+        Text("HELLOO", color = Color.Magenta)
     }
 }
 
@@ -91,8 +104,10 @@ private fun BaseSpriteAnimationPreview() {
     BasePreview(background = Color.Transparent) {
         BaseSpriteAnimation(
             imageBitmap = BaseIcons.MockImageBitmap.toBitmap(),
-            frameCount = 4,
-            sizeImage = 128.dp
+            frameSize = 512.dp,
+            columns = 4,
+            rows = 2,
+            frameDurationMs = 90
         )
     }
 }

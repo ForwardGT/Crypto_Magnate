@@ -9,7 +9,7 @@ import com.blockchainlab.cryptomagnate.R.drawable as r
 enum class BaseIcons(override val id: Int) : BaseDrawable {
     ArrowDrawable(r.ic_arrow_back),
     MockPng(r.mock_png),
-    MockImageBitmap(r.spritesheet)
+    MockImageBitmap(r.freepik__background__85283),
 }
 
 @Composable

@@ -5,7 +5,7 @@ import androidx.compose.runtime.Composable
 
 @Composable
 fun CryptoMagnateTheme(
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
     MaterialTheme(
         colorScheme = MaterialTheme.colorScheme.copy(

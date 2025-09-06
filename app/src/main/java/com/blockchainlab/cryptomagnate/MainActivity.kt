@@ -16,7 +16,9 @@ class MainActivity : ComponentActivity() {
         setContent {
             val navController = rememberNavController()
             CryptoMagnateTheme {
-                AppNavGraph(navController = navController)
+                AppNavGraph(
+                    navController = navController,
+                )
             }
         }
     }
